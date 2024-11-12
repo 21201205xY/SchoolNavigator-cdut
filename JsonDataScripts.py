@@ -1,3 +1,5 @@
+from imaplib import Flags
+
 from svgpathtools import svg2paths
 import json
 
@@ -9,37 +11,50 @@ outputLocations = []
 
 ADDINFO = False
 locationInfo = {
-"宿舍楼3幢":                   "男生宿舍。其中702室居住着珊瑚宫的战士们。",
-"宿舍楼B11":                   "男生宿舍。",
-"菜鸟驿站":                    "学校的快递中心，负责收发所有快递。",
-"东门":                        "在菜鸟驿站的东侧。快递和货物从这里进出，一般不对师生开放。",
-"体育馆":                      "于2021年建成的新体育馆，有着干净漂亮的羽毛球场地。该馆承办过许多民间或者官方的赛事和活动。",
-"旧操场":                      "包含排球场、篮球场和旧足球场。虽距离宿舍楼较远，在课余时间依然能见到许许多多挥洒汗水的身影。旁边的旧足球场已经废弃，杂草横生，是校园内有较好环境的自然去处。",
-"宿舍楼A1":                    "女生宿舍。",
-"教学楼C":                     "多媒体教学楼，最高5层。",
-"图书馆":                      "全校最大的藏书室。有着众多小说和文学作品，同学们总能在这里找到自己的最爱。",
-"第二行政楼":                  "神秘领域，具体信息暂时未公开。",
-"宿舍楼D1":                    "男生宿舍。",
-"实验楼A":                     "[待完善]XXX院的实验楼，有着众多先进的仪器和设备。",
-"实验楼B":                     "计算机学院的实验楼，著名的紫金学院IT工作室“ZJIT”就坐落于其中。每年从这幢楼里走出来的“高手”数不胜数。",
-"实验楼C":                     "电光学院实验楼，偶尔会承接其它学院的专业类课程。",
-"紫金湖":                      "你在桥上看风景，看风景的人在楼上看你~。",
-"实验楼D":                     "[待完善]XXX院的实验楼，很神秘。",
-"西门":                        "学校平日里师生进出的主要通道。由于出门后外面就是超市、商场、水果店等店铺，很受同学们欢迎。",
-"南大门":                      "学校的大门。新生入学和返校都在这里进出。学校最气派的紫金雕刻也在这里。",
-"教学楼B":                     "理论课的主要教学楼。相信每位同学都在这里度过了难忘的高等数学课。",
-"教学楼A":                     "英语教学楼。4楼是国际部的专属空间。",
-"一食堂":                      "食堂内有一块大屏幕，可以看世界杯、LPL、TI等比赛。这个食堂除了贵没有缺点。",
-"行政楼":                      "校领导驻扎地。",
-"二食堂":                      "学校内最大的食堂，共三层。",
-"大操场":                      "大操场，好大哎。",
+"东区操场": 			""
+,"香樟": 			""
+,"图书馆": 			""
+,"东区二教": 			""
+,"东区一教": 			""
+,"东门": 			""
+,"东区后街": 			""
+,"艺术大楼": 			""
+,"自然博物馆门": 			""
+,"农贸": 			""
+,"后街": 			""
+,"计科院": 			""
+,"商学院": 			""
+,"珙桐园": 			""
+,"松林园": 			""
+,"实验大楼": 			""
+,"银杏园": 			""
+,"银杏餐厅": 			""
+,"沉积地质研究院": 			""
+,"八教": 			""
+,"九教": 			""
+,"地规院": 			""
+,"现代教学大楼": 			""
+,"二教": 			""
+,"芙蓉": 			""
+,"芙蓉餐厅": 			""
+,"砚湖图书馆": 			""
+,"体育学院": 			""
+,"西区操场": 			""
+,"网球场": 			""
+,"篮球场": 			""
+,"榕树园": 			""
+,"西门": 			""
+,"西北门": 			""
+,"理工大学地铁口": 			""
 }
 
 for i in range(len(paths)):
     if "r" not in attributes[i].keys():
+        if (paths[i].end is None) or (paths[i].start is None):
+            continue
         outputPaths.append(paths[i])
     else:
-        if attributes[i]["class"] == "cls-3":   # 如果改了节点的名称，这里要改为 data-name 的判断方式
+        if attributes[i]["r"] == "3":   # 如果改了节点的名称，这里要改为 data-name 的判断方式
             outputVertices.append(attributes[i])
         else:
             outputLocations.append(attributes[i])
@@ -57,7 +72,7 @@ graph = {
 for i in outputVertices:
     graph["Vertices"].append({
         "Id": verticeCount,
-        "Name": i["data-name"],  # TODO: Vertice 节点，Name字段可更改
+        "Name": 0,  # TODO: Vertice 节点，Name字段可更改
         "X": float(i["cx"]),  # 这里事后debug一下，存储float值还是str值
         "Y": float(i["cy"]),
     })
@@ -77,10 +92,14 @@ def getXY(point):
 
 
 def getPathStart(path):
+    if path.start is None:
+        return 0
     return getXY(path.start)
 
 
 def getPathEnd(path):
+    if path.end is None:
+        return 0
     return getXY(path.end)
 
 
@@ -102,8 +121,8 @@ for i in outputPaths:
 for i in outputLocations:
     graph["Locations"].append({
         "Id": verticeCount,
-        "Name": i["data-name"], 
-        "Info": "" if ADDINFO else locationInfo[i["data-name"]],     
+        "Name": i["id"],
+        "Info": "" if ADDINFO else locationInfo[i["id"]],
         "X": float(i["cx"]),  # 这里事后debug一下，存储float值还是str值
         "Y": float(i["cy"]),
         "LocatedVerticeIds": [],
