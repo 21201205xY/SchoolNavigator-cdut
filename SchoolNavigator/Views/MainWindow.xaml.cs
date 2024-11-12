@@ -475,8 +475,8 @@ public partial class MainWindow : Window
     private void AdminModeHandler(bool enable = false)
     {
         IsAdminMode = enable;
-        Title.Text = enable ? "管理员模式" : "紫金学院校园导航系统";
-        TitleBar.Mode = enable ? ColorZoneMode.SecondaryDark : ColorZoneMode.PrimaryDark;
+        Title.Text = enable ? "管理员模式" : "成都理工校园导航系统";
+        TitleBar.Mode = enable ? ColorZoneMode.SecondaryDark : ColorZoneMode.Standard;
 
         var disabledPaths = new HashSet<int>();
         foreach (var path in _graph.Paths)

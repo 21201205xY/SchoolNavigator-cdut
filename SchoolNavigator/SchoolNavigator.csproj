@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>cdut.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,7 +30,7 @@
     <Content Include="Data\graph.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="icon.ico" />
+    <Content Include="cdut.ico" />
     <Content Include="Images\SchoolMap.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
