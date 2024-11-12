@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolNavigator.Views"
         mc:Ignorable="d"
-        Title="紫金学院校园导航"
-        Height="930"
-        Width="1800"
+        Title="成都理工校园导航"
+        Height="850"
+        Width="2000"
         MinHeight="620"
         MinWidth="1200"
         Closing="MainWindow_OnClosing"
@@ -216,7 +216,7 @@
                  Stretch="Uniform"
                  StretchDirection="Both">
             <Canvas x:Name="MainCanvas"
-                    Width="1200"
+                    Width="1450"
                     Height="900">
                 <Canvas.Background>
                     <ImageBrush ImageSource="/Images/SchoolMap.jpg" />
@@ -232,7 +232,7 @@
 
             <!-- 背景：不透明度为2%的紫金logo -->
             <StackPanel.Background>
-                <ImageBrush ImageSource="/Images/Zijin_Logo_Blank.png" />
+                <ImageBrush ImageSource="/Images/cdut_logo.png" />
             </StackPanel.Background>
 
             <!-- 标题栏 -->
@@ -241,12 +241,12 @@
                                       Padding="16"
                                       Height="90">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/images/Zijin_Logo_White.png"
+                    <Image Source="/images/touhou_cdut_Logo.png"
                            MouseRightButtonDown="EnterAdminMode_OnMouseRightButtonDown" />
                     <TextBlock x:Name="Title"
                                VerticalAlignment="Center"
                                Margin="16 0 0 0"
-                               Text="紫金学院校园导航系统"
+                               Text="成都理工校园导航系统"
                                FontSize="40"
                                MouseRightButtonDown="Title_OnMouseRightButtonDown" />
                 </StackPanel>
@@ -333,29 +333,7 @@
                             <!--           HorizontalAlignment="Left" /> -->
 
                         </Grid>
-
-                        <!-- 附加选项 -->
-                        <StackPanel Orientation="Vertical">
-
-                            <!-- 是否允许楼内穿行？ -->
-                            <CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"
-                                      IsChecked="True"
-                                      Content="楼内穿行"
-                                      Margin="10" />
-
-                            <!-- 是否只走大路（行车道）？ -->
-                            <CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"
-                                      IsChecked="False"
-                                      Content="只走大路"
-                                      Margin="10" />
-
-                            <!-- 是否尽可能多地途径景点？（访客可能需要） -->
-                            <CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"
-                                      IsChecked="False"
-                                      Content="景点优先"
-                                      Margin="10" />
-
-                        </StackPanel>
+                        
                     </StackPanel>
 
                     <!-- 操作按钮 -->
@@ -391,7 +369,7 @@
                                 Height="500">
 
                         <!-- 标签页：介绍、路线 -->
-                        <materialDesign:Card Height="500">
+                        <materialDesign:Card Height="AUTO" MinHeight="300">
                             <TabControl x:Name="InfoTab"
                                         Width="300"
                                         materialDesign:ColorZoneAssist.Mode="PrimaryDark"
@@ -443,7 +421,7 @@
                                             <!-- 默认提示文本（没有选中任何景点时） -->
                                             <TextBlock Grid.Row="0"
                                                        x:Name="IntroduceBoxEmptyText"
-                                                       Text="小紫不知道哦。"
+                                                       Text="选取地点后显示"
                                                        Margin="0 10 0 10"
                                                        Visibility="Visible" />
                                         </Grid>

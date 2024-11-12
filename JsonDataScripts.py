@@ -5,6 +5,7 @@ import json
 
 paths, attributes = svg2paths("SchoolMap.svg")
 
+scale_level = 0.0
 outputPaths = []
 outputVertices = []
 outputLocations = []
@@ -54,10 +55,11 @@ for i in range(len(paths)):
             continue
         outputPaths.append(paths[i])
     else:
-        if attributes[i]["r"] == "3":   # 如果改了节点的名称，这里要改为 data-name 的判断方式
+        if attributes[i]["r"] == "1.27":   # 如果改了节点的名称，这里要改为 data-name 的判断方式
             outputVertices.append(attributes[i])
         else:
             outputLocations.append(attributes[i])
+
 
 
 pathCount = 0
@@ -182,14 +184,6 @@ for i in graph["Locations"]:
     i["LocatedPathIds"] += locatedPaths
 
 
-
-# 这是魔法，性能不行，易读性差，但是很帅（
-
-# for i in graph["Locations"]:
-#     locatedVertices, locatedPaths = getRelatedVerticesAndPaths(i)
-#     i["LocatedVerticeIds"].append([path["EndVerticeId"] for path in graph["Paths"] if path["StartVerticeId"] == i["Id"] and path["IsRelated"] == True])
-#     i["LocatedPathIds"].append([path["Id"] for path in graph["Paths"] if path["StartVerticeId"] == i["Id"] and path["IsRelated"] == True])
-
 DEBUG = not ADDINFO
 if DEBUG:
     jsonString = json.dumps(graph, indent=2, sort_keys=True)
@@ -202,77 +196,77 @@ else:
 
 """---------------------------------------------------------------------------------------------------"""
 
-DEPRECATED = True
-if DEPRECATED:
-
-    """以下都是本用于输出 XAML 样式的脚本，现已停用"""
-
-
-    def getPaths(method):
-        result = []
-        for i in range(len(outputPaths)):
-            result.append(method(graph["Paths"][i]["Name"], outputPaths[i].d()))
-        # for i in range(len(outputRelated)):
-        #     result.append(method(graph["Paths"][i + len(outputPaths)]["Name"], outputPaths[i].d()))
-
-        # list[str]
-        return result
-
-
-    def getVertices(method):
-        result = []
-        for vertice in graph["Vertices"]:
-            result.append(
-                method(vertice["Name"], vertice["X"], vertice["Y"], 1.5)) # 这里设置 vertice 节点的半径
-
-        # list[str]
-        return result
-
-
-    def getLocations(method):
-        result = []
-        for location in graph["Locations"]:
-            result.append(
-                method(location["Name"], location["X"], location["Y"]))
-
-        # list[str]
-        return result
-
-
-    """---------------------------------------------------------------------------------------------------"""
-
-
-    def getXAMLPath(name, path):
-        return f"""
-    <Path x:Name="{name}" Style="{{StaticResource Route}}">
-        <Path.Data>
-            <PathGeometry Figures="{path}" />
-        </Path.Data>
-    </Path>"""
-
-
-    def getXAMLEllipse(name, x, y, r):
-
-        # SVG 转 XAML 时需要将数值转化，只适用于无边框圆形
-        return f"""
-    <Ellipse x:Name="{name}" Style="{{StaticResource WayPoint}}"
-            Canvas.Left="{x - r}" Canvas.Top="{y - r}"
-            Height="{r * 2}" Width="{r * 2}" />"""
-
-
-    def getXAMLLocation(name, x, y):
-        return f"""
-    <Button x:Name="{name}" Style="{{StaticResource Location}}"
-            Canvas.Left="{x}" Canvas.Top="{y}"
-            Click="Location_OnClick"
-            MouseDoubleClick="Location_OnMouseDoubleClick" />"""
-
-
-EXPORT = False
-if EXPORT:
-    output = open("output.xaml", "w")
-    output.writelines(getPaths(getXAMLPath))
-    output.writelines(getVertices(getXAMLEllipse))
-    output.writelines(getLocations(getXAMLLocation))
-    output.close()
+# DEPRECATED = True
+# if DEPRECATED:
+#
+#     """以下都是本用于输出 XAML 样式的脚本，现已停用"""
+#
+#
+#     def getPaths(method):
+#         result = []
+#         for i in range(len(outputPaths)):
+#             result.append(method(graph["Paths"][i]["Name"], outputPaths[i].d()))
+#         # for i in range(len(outputRelated)):
+#         #     result.append(method(graph["Paths"][i + len(outputPaths)]["Name"], outputPaths[i].d()))
+#
+#         # list[str]
+#         return result
+#
+#
+#     def getVertices(method):
+#         result = []
+#         for vertice in graph["Vertices"]:
+#             result.append(
+#                 method(vertice["Name"], vertice["X"], vertice["Y"], 1.5)) # 这里设置 vertice 节点的半径
+#
+#         # list[str]
+#         return result
+#
+#
+#     def getLocations(method):
+#         result = []
+#         for location in graph["Locations"]:
+#             result.append(
+#                 method(location["Name"], location["X"], location["Y"]))
+#
+#         # list[str]
+#         return result
+#
+#
+#     """---------------------------------------------------------------------------------------------------"""
+#
+#
+#     def getXAMLPath(name, path):
+#         return f"""
+#     <Path x:Name="{name}" Style="{{StaticResource Route}}">
+#         <Path.Data>
+#             <PathGeometry Figures="{path}" />
+#         </Path.Data>
+#     </Path>"""
+#
+#
+#     def getXAMLEllipse(name, x, y, r):
+#
+#         # SVG 转 XAML 时需要将数值转化，只适用于无边框圆形
+#         return f"""
+#     <Ellipse x:Name="{name}" Style="{{StaticResource WayPoint}}"
+#             Canvas.Left="{x - r}" Canvas.Top="{y - r}"
+#             Height="{r * 2}" Width="{r * 2}" />"""
+#
+#
+#     def getXAMLLocation(name, x, y):
+#         return f"""
+#     <Button x:Name="{name}" Style="{{StaticResource Location}}"
+#             Canvas.Left="{x}" Canvas.Top="{y}"
+#             Click="Location_OnClick"
+#             MouseDoubleClick="Location_OnMouseDoubleClick" />"""
+#
+#
+# EXPORT = False
+# if EXPORT:
+#     output = open("output.xaml", "w")
+#     output.writelines(getPaths(getXAMLPath))
+#     output.writelines(getVertices(getXAMLEllipse))
+#     output.writelines(getLocations(getXAMLLocation))
+#     output.close()
 

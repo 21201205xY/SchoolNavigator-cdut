@@ -20,6 +20,7 @@ namespace SchoolNavigator.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private const double SCALE_LEVEL = 1;
     private Graph? _graph;
     private Ellipse[]? _verticEllipses;
     private Button[]? _locationButtons;
@@ -170,8 +171,8 @@ public partial class MainWindow : Window
             // 定义圆点的坐标
             ellipse.Height = 2 * r;
             ellipse.Width = 2 * r;
-            Canvas.SetLeft(ellipse, _graph.Vertices[i].X - r);
-            Canvas.SetTop(ellipse, _graph.Vertices[i].Y - r);
+            Canvas.SetLeft(ellipse, (_graph.Vertices[i].X - r)/ SCALE_LEVEL);
+            Canvas.SetTop(ellipse, (_graph.Vertices[i].Y - r)/SCALE_LEVEL);
 
             MainCanvas.Children.Add(ellipse);
         }
@@ -200,8 +201,8 @@ public partial class MainWindow : Window
             btn.MouseRightButtonDown += Location_OnMouseRightButtonDown;
 
             // 设置控件的位置
-            Canvas.SetLeft(btn, _graph.Locations[i].X);
-            Canvas.SetTop(btn, _graph.Locations[i].Y);
+            Canvas.SetLeft(btn, _graph.Locations[i].X/ SCALE_LEVEL);
+            Canvas.SetTop(btn, _graph.Locations[i].Y/ SCALE_LEVEL);
 
             MainCanvas.Children.Add(btn);
         }
@@ -440,8 +441,8 @@ public partial class MainWindow : Window
             }
         }
 
-        // 60 pixel = 50m
-        var result = $"{distances[endIndex] * 5 / 6:F1}m";
+        // 100 pixel = 100m 居然刚刚好？？！
+        var result = $"{distances[endIndex]:F1}m";
         RouteDistanceText.Text = result;
         Debug.WriteLine(result);
     }

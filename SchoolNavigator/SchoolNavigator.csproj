@@ -22,8 +22,8 @@
   <ItemGroup>
     <None Remove="Data\graph.json" />
     <None Remove="Images\SchoolMap.jpg" />
-    <None Remove="Images\Zijin_Logo_Blank.png" />
-    <None Remove="Images\Zijin_Logo_White.png" />
+    <None Remove="Images\cdut_logo.png" />
+    <None Remove="Images\touhou_cdut_Logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,7 +34,7 @@
     <Content Include="Images\SchoolMap.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Zijin_Logo_White.png">
+    <Content Include="Images\touhou_cdut_Logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -54,7 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\Zijin_Logo_Blank.png">
+    <Content Include="Images\cdut_logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

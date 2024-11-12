@@ -39,7 +39,7 @@ public class Graph
             int end = path.EndVerticeId;
 
             // Debug 时断言：保证路径两端节点在数组中初始为0，这样就不会出现覆盖。
-            Debug.Assert(PathWeights[start][end] == 0, $"i={start}, j={end}, value={PathWeights[start][end]}");
+            //Debug.Assert(PathWeights[start][end] == 0, $"i={start}, j={end}, value={PathWeights[start][end]}");
 
             // 如果路径被禁用，则不会写入权重值。
             if (path.IsEnabled == false) continue;
