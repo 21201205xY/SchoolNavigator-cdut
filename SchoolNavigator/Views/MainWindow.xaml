@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:SchoolNavigator.Views"
         mc:Ignorable="d"
         Title="成都理工校园导航"
-        Height="900"
-        Width="1910"
-        MinHeight="900"
-        MinWidth="1200"
+        Height="750"
+        Width="1273"
+        MinHeight="600"
+        MinWidth="900"
         Closing="MainWindow_OnClosing"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
@@ -208,7 +208,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="506"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <!-- 导航界面和图片 -->
@@ -261,7 +261,7 @@
                         Margin="50 0 50 0">
 
                 <!-- 功能区 -->
-                <StackPanel>
+                <StackPanel Height="550">
 
                     <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
@@ -371,16 +371,16 @@
                                 Height="500">
 
                         <!-- 标签页：介绍、路线 -->
-                        <materialDesign:Card Height="AUTO" MinHeight="450">
+                        <materialDesign:Card Height="AUTO" MinHeight="300">
                             <TabControl x:Name="InfoTab"
-                                        Width="300"
+                                        Width="350"
                                         materialDesign:ColorZoneAssist.Mode="PrimaryDark"
                                         SelectedIndex="0">
 
                                 <!-- 介绍 页面 -->
                                 <TabItem Header="介绍">
                                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                        <Grid>
+                                        <Grid Margin="0,0,0,0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
                                                 <RowDefinition Height="Auto" />
@@ -391,7 +391,7 @@
                                                       x:Name="IntroduceBox1"
                                                       Header=""
                                                       Style="{StaticResource MaterialDesignGroupBox}"
-                                                      Margin="20 20 20 20"
+                                                      Margin="20 20 20 0"
                                                       materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                                       BorderThickness="0"
                                                       Visibility="Collapsed"
@@ -408,7 +408,7 @@
                                                       x:Name="IntroduceBox2"
                                                       Header=""
                                                       Style="{StaticResource MaterialDesignGroupBox}"
-                                                      Margin="20 20 20 20"
+                                                      Margin="20 20 20 0"
                                                       materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                                       BorderThickness="0"
                                                       Visibility="Collapsed"
@@ -453,57 +453,6 @@
                                                 <TextBlock x:Name="RouteDistanceText"
                                                            TextWrapping="Wrap"
                                                            FontSize="28" />
-                                            </materialDesign:Card>
-
-
-                                            <!-- 途径节点信息 -->
-                                            <materialDesign:Card Grid.Row="1"
-                                                                 Visibility="Collapsed">
-                                                <StackPanel>
-
-                                                    <Expander HorizontalAlignment="Stretch"
-                                                              Header="图书馆 100m">
-                                                        <StackPanel Orientation="Vertical"
-                                                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                                                                    Margin="24,8,24,16">
-                                                            <TextBlock Text="Your Content"
-                                                                       FontWeight="Bold" />
-                                                            <TextBlock Style="{StaticResource MaterialDesignTextBlock}"
-                                                                       TextWrapping="Wrap"
-                                                                       Text="203423042385239047023sdlfagiafasjfioasjipgofsfsadpfjsda" />
-                                                        </StackPanel>
-                                                    </Expander>
-
-                                                    <Border Style="{StaticResource MaterialDesignToolBarMainPanelBorderStyle}" />
-
-                                                    <Expander HorizontalAlignment="Stretch"
-                                                              Header="大操场 421m">
-                                                        <StackPanel Orientation="Vertical"
-                                                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                                                                    Margin="24,8,24,16">
-                                                            <TextBlock Text="Your Content" />
-                                                            <TextBlock Style="{StaticResource MaterialDesignTextBlock}"
-                                                                       Text="203423042385239047023sdlfagiafasjfioasjipgofsfsadpfjsda203423042385239047023sdlfagiafasjfioasjipgofsfsadpfjsda"
-                                                                       TextWrapping="Wrap" />
-                                                        </StackPanel>
-                                                    </Expander>
-
-                                                    <Border Style="{StaticResource MaterialDesignToolBarMainPanelBorderStyle}" />
-
-                                                    <Expander HorizontalAlignment="Stretch"
-                                                              Header="Expander Example 2c">
-                                                        <StackPanel Orientation="Vertical"
-                                                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-                                                                    Margin="24,8,24,16">
-                                                            <TextBlock Text="Your Content" />
-                                                            <TextBlock Style="{StaticResource MaterialDesignTextBlock}"
-                                                                       TextWrapping="Wrap"
-                                                                       Text="203423042385239047023sdlfagiafasjfioasjipgofsfsadpfjsda203423042385239047023sdlfagiafasjfioasjipgofsfsadpfjsda" />
-                                                        </StackPanel>
-                                                    </Expander>
-
-                                                </StackPanel>
-
                                             </materialDesign:Card>
 
 
